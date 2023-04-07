@@ -1,16 +1,9 @@
-import { Program } from "./src/program";
-import { Scraper } from "./src/scraper/default";
-import { UnbScraper } from "./src/scraper/unb";
+import { Scraper } from "./src/scraper";
 
 (async () => {
-  const unb = new UnbScraper();
+  const scraper = new Scraper({ baseUrl: "https://sigaa.unb.br/sigaa/public" });
 
-  const program = new Program(unb, {
-    id: 414924,
-    title: "Ciência da Computação",
-    degree: "Bacharelado",
-    shift: "Noturno",
-  });
+  const program = await scraper.getProgramById(414924);
 
-  program.getCurricula();
+  console.log(program.get());
 })();
